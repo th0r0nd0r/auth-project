@@ -2,6 +2,7 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from './schema/schema';
 import mongoose from 'mongoose';
+import authRoutes from './routes/auth-routes';
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.use('/', graphqlHTTP({
   schema,
   graphiql: true,
 }));
+
+app.use('/auth', authRoutes);
 
 app.listen(4000, () => {
   console.log("Now listening on port 4000");
