@@ -1,0 +1,36 @@
+Making the Project
+
+* THE BASICS
+
+Backend:
+
+- install backend packages
+- setup server with express
+  + create user schema
+
+- connect to MongoDB 
+  + make new database on site
+  + add connection string
+
+- setup GraphQL on backend
+
+Frontend:
+
+- install packages
+- setup webpack config
+- create skeleton app in entry file
+
+* NEXT STEPS:
+
+Backend:
+
+Frontend:
+- setup GraphQL with Apollo
+- Flesh out Components + Routes (Protect some routes)
+
+Fullstack:
+- Auth
+  + use Node package like Passport
+    * Use strategy for JWT or Session Token
+    * Integrate with LinkedIn OAuth
+
