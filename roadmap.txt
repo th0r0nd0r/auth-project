@@ -36,5 +36,7 @@ Fullstack:
     * Integrate with LinkedIn OAuth
 
 
-Nice-to-haves:
+Future improvements:
 - design frontend for mobile browsers
+- add real styling
+- add redux for scaling to full-sized app
