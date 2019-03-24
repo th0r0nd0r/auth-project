@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import keys from '../config/keys';
+import { secretOrKey } from '../config/keys';
 import validateLogin from '../validation/login';
 import validateSignup from '../validation/signup';
 import User from '../models/User';
@@ -15,11 +15,14 @@ router.get('/login', (req, res) => {
 router.post('/signup', (req, res) => {
   const { name, email, password } = req.body;
 
+  // validate user info
   const { errors, isValid } = validateSignup(req.body);
+
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
+  // ensure sure user is new
   User.findOne({email}).then(user => {
     if (user) {
       return res.status(400).json({email: "Email already exists"});
@@ -37,6 +40,57 @@ router.post('/signup', (req, res) => {
     });
   });
 });
+
+router.post("/login", (req, res) => {
+  const { errors, isValid } = validateLogin(req.body);
+
+  // validate user info
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const email = req.body.email;
+  const password = req.body.password;
+
+  User.findOne({ email }).then(user => {
+    // ensure user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    }
+
+    bcrypt.compare(password, user.password).then(isMatch => {
+
+      // validate hashed password
+      if (isMatch) {
+        const payload = {
+          id: user.id,
+          name: user.name
+        };
+
+        // sign jwt
+        jwt.sign(
+          payload,
+          secretOrKey,
+          {
+            expiresIn: 300 // 5 minutes (in seconds)
+          },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          }
+        );
+      } else {
+        return res
+          .status(400)
+          .json({ passwordincorrect: "Password incorrect" });
+      }
+    });
+  });
+});
+
+// token patterns from https://github.com/rishipr/mern-auth/tree/master/routes/api
 
 router.get('/logout', (req, res) => {
   // log out users

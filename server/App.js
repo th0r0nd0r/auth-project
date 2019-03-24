@@ -4,6 +4,8 @@ import schema from './schema/schema';
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth';
 import keys from './config/keys';
+import passport from 'passport';
+import passportConfig from './config/passport';
 
 const app = express();
 
@@ -17,17 +19,11 @@ mongoose.connection.once('open', () => {
   console.log('the goose is in the burrow');
 });
 
-app.use('/', graphqlHTTP({
-  schema,
-  graphiql: true,
-}));
+// initialize + configure passport with jwt Strategy
+app.use(passport.initialize());
+passportConfig(passport);
 
 app.use('/auth', authRoutes);
-
-// would use if React project was served by the backend (e.g. if it was rooted in an ejs file)
-// app.get('*', (req, res) => {                       
-//   res.sendFile('../client/index.html');                               
-// });
 
 app.listen(PORT, () => {
   console.log(`Now listening on port ${PORT}`);
