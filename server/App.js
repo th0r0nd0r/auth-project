@@ -2,15 +2,15 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from './schema/schema';
 import mongoose from 'mongoose';
-import authRoutes from './routes/auth-routes';
-import path from 'path';
+import authRoutes from './routes/auth';
 import keys from './config/keys';
 
 const app = express();
 
+// use environment variable in production
+const PORT = process.env.PORT || 5000;
+
 // connect to database
-// NOTE: the connection string should at the very least be an environment variable, oustide the application code.
-// I'm just exposing it here for the purpose of easily sharing access to the coding challenge.
 mongoose.connect(keys.mongoString, {useNewUrlParser: true});
 
 mongoose.connection.once('open', () => {
@@ -29,6 +29,6 @@ app.use('/auth', authRoutes);
 //   res.sendFile('../client/index.html');                               
 // });
 
-app.listen(4000, () => {
-  console.log("Now listening on port 4000");
+app.listen(PORT, () => {
+  console.log(`Now listening on port ${PORT}`);
 });

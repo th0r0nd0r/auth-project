@@ -1,7 +1,7 @@
 const Validator = require("validator");
 const isEmpty = require("is-empty");
 
-module.exports = function validateRegisterInput(data) {
+export default function validateLogin(data) {
   let errors = {};
 
   // Convert empty fields to an empty string so we can use validator functions
@@ -23,6 +23,6 @@ module.exports = function validateRegisterInput(data) {
     errors,
     isValid: isEmpty(errors)
   };
-};
+}
 
 // validation boilerplate from https://github.com/rishipr/mern-auth/tree/master/validation
