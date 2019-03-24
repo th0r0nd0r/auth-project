@@ -14,6 +14,7 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
+  console.log("request body: ", req.body);
   const { name, email, password } = req.body;
 
   // validate user info

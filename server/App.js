@@ -6,8 +6,12 @@ import authRoutes from './routes/auth';
 import keys from './config/keys';
 import passport from 'passport';
 import passportConfig from './config/passport';
+import bodyParser from 'body-parser';
 
 const app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // use environment variable in production
 const PORT = process.env.PORT || 4000;
