@@ -6,7 +6,8 @@ module.exports = {
   entry: "./app.jsx",
   output: {
     path: path.resolve(__dirname),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -21,6 +22,9 @@ module.exports = {
         },
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   devtool: 'source-map',
   resolve: {

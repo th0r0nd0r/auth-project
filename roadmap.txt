@@ -23,6 +23,7 @@ Frontend:
 * NEXT STEPS:
 
 Backend:
+- add CORS
 
 Frontend:
 - setup GraphQL with Apollo
