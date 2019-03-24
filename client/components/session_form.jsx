@@ -35,10 +35,12 @@ export default class SessionForm extends React.Component {
           <label className="form-label" htmlFor="input-example-1">Email</label>
           <input className="form-input" type="text" id="input-example-1" placeholder="Email" />
           <div>
-            <button className="btn btn-primary submit-btn col-3" onClick={() => console.log("button clicked")}>
+            <button className="btn btn-primary submit-btn" onClick={() => console.log("button clicked")}>
               {btnText}
             </button>
-            or <span className="ul-hover" onClick={this.toggleFormType}>{altText}</span>
+            <div className="centered-text">
+              or <span className="ul-hover" onClick={this.toggleFormType}>{altText}</span>
+            </div>
           </div>
         </div>
       </div>

@@ -4,13 +4,21 @@
 
 .submit-btn {
   margin: 12px 0px;
+  width: 100%;
 }
 
 .ul-hover {
   color: #5755d9;
   cursor: pointer;
+  margin-left: 5px;
 }
 
 .ul-hover:hover {
   text-decoration: underline;
+}
+
+.centered-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
