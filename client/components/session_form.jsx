@@ -35,24 +35,24 @@ export default class SessionForm extends React.Component {
           </div>
 
           {!isLoginForm && 
-            <div className="form-group">
-              <label className="form-label" htmlFor="username">Username</label>
+            <div className="input-group">
+              {/* <label className="form-label" htmlFor="username">Username</label> */}
               <input className="form-input" type="text" id="username" placeholder="Username" />
             </div>
           }
-          <div className="form-group">
-            <label className="form-label" htmlFor="email">Email</label>
+          <div className="input-group">
+            {/* <label className="form-label" htmlFor="email">Email</label> */}
             <input className="form-input" type="text" id="email" placeholder="Email" />
           </div>
-          <div className="form-group">
-            <label className="form-label" htmlFor="password">Password</label>
+          <div className="input-group">
+            {/* <label className="form-label" htmlFor="password">Password</label> */}
             <input className="form-input" type="password" id="password" placeholder="Password" />
           </div>
 
           {!isLoginForm && 
-            <div className="form-group">
-              <label className="form-label" htmlFor="confirm-password">Confirm Password</label>
-              <input className="form-input" type="password" id="confirm-password" placeholder="Password" />
+            <div className="input-group">
+              {/* <label className="form-label" htmlFor="confirm-password">Confirm Password</label> */}
+              <input className="form-input" type="password" id="confirm-password" placeholder="Confirm Password" />
             </div>
           }
           <div>
