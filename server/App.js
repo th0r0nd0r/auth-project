@@ -23,9 +23,10 @@ app.use('/', graphqlHTTP({
 
 app.use('/auth', authRoutes);
 
-app.get('*', (req, res) => {                       
-  res.sendFile('../client/index.html');                               
-});
+// would use if React project was served by the backend (e.g. if it was rooted in an ejs file)
+// app.get('*', (req, res) => {                       
+//   res.sendFile('../client/index.html');                               
+// });
 
 app.listen(4000, () => {
   console.log("Now listening on port 4000");
