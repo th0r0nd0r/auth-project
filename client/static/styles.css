@@ -1,3 +1,7 @@
+html, body, .bg {
+  background-color: #f1f1fc;
+}
+
 .form {
   padding: 20px 40px;
 }

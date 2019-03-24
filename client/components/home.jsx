@@ -16,7 +16,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="bg">
           {/* <h1>React is up and running!</h1> */}
           <Route exact path="/" render={() => (
             !loggedIn ? (
