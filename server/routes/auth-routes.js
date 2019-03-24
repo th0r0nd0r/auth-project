@@ -1,5 +1,6 @@
 import express from 'express';
 const router = express.Router();
+import bcrypt from 'bcryptjs';
 
 // standard auth route
 router.get('/login', (req, res) => {
