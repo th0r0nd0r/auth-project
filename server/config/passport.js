@@ -2,7 +2,8 @@ import { Strategy, ExtractJwt } from 'passport-jwt';
 
 // in a real app, would use something like:
 // const secretOrKey = process.env.SECRET
-import { secretOrKey } from './keys';
+import keys from './keys';
+const secretOrKey = keys.secretOrKey;
 import mongoose from 'mongoose';
 const User = mongoose.model("User");
 const options = {

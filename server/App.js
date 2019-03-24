@@ -10,7 +10,7 @@ import passportConfig from './config/passport';
 const app = express();
 
 // use environment variable in production
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 // connect to database
 mongoose.connect(keys.mongoString, {useNewUrlParser: true});

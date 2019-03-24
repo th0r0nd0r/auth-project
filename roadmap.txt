@@ -35,3 +35,6 @@ Fullstack:
     * Use strategy for JWT or Session Token
     * Integrate with LinkedIn OAuth
 
+
+Nice-to-haves:
+- design frontend for mobile browsers
