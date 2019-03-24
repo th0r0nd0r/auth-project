@@ -1,0 +1,16 @@
+.form {
+  padding: 40px 40px;
+}
+
+.submit-btn {
+  margin: 12px 0px;
+}
+
+.ul-hover {
+  color: #5755d9;
+  cursor: pointer;
+}
+
+.ul-hover:hover {
+  text-decoration: underline;
+}
