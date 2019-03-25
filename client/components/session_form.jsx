@@ -33,12 +33,10 @@ export default class SessionForm extends React.Component {
   }
 
   handleError(errors) {
-    console.log("response errors: ", errors);
     this.setState({errors});
   }
 
   handleSubmit() {
-    // console.log("submitting...");
     const {name, email, password, password2} = this.state;
     const {submitUser, history} = this.props;
 
@@ -47,9 +45,9 @@ export default class SessionForm extends React.Component {
     submitUser(user, history, this.handleError);
   }
 
-  componentDidUpdate() {
-    console.log("new state: ", this.state);
-  }
+  // componentDidUpdate() {
+  //   console.log("new state: ", this.state);
+  // }
 
   // componentDidMount() {
   //   console.log("mounted");
@@ -62,7 +60,7 @@ export default class SessionForm extends React.Component {
   // }
 
   render() {
-    // console.log("session form props: ", this.props);
+    console.log("session form props: ", this.props);
     // console.log("session form state: ", this.state);
     const {errors} = this.state;
     const {submitUser, isLoginForm} = this.props;

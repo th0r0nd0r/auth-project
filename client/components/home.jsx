@@ -15,9 +15,21 @@ let loggedIn = false;
 class Home extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      currentUser: null
+    };
+
+    this.setCurrentUser = this.setCurrentUser.bind(this);
+  }
+
+  setCurrentUser(currentUser) {
+    this.setState({currentUser});
   }
 
   render() {
+    const {currentUser} = this.state;
+
     return (
       <Router>
         <div className="bg">
@@ -26,17 +38,23 @@ class Home extends React.Component {
             !loggedIn ? (
               <Redirect to="/signup"/>
             ) : (
-              <Dashboard />
+              <Dashboard currentUser={currentUser}/>
             )
           )}/>
           <Route path="/login" render={(props) => <SessionForm 
                                                     {...props} 
                                                     isLoginForm={true} 
-                                                    submitUser={authUtils.loginUser} /> } />
+                                                    submitUser={authUtils.loginUser}
+                                                    currentUser={currentUser}
+                                                    setCurrentUser={this.setCurrentUser}
+                                                     /> } />
           <Route path="/signup" render={(props) => <SessionForm 
                                                     {...props} 
                                                     isLoginForm={false} 
-                                                    submitUser={authUtils.signupUser} /> } />
+                                                    submitUser={authUtils.signupUser} 
+                                                    currentUser={currentUser}
+                                                    setCurrentUser={this.setCurrentUser}
+                                                    /> } />
         </div>
       </Router>
     );
