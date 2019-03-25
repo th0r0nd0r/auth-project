@@ -28,19 +28,20 @@ router.post('/signup', (req, res) => {
   User.findOne({email}).then(user => {
     if (user) {
       return res.status(400).json({email: "Email already exists"});
+    } else {
+      const newUser = new User({name, email, password});
+    
+      // salt + hash password before saving
+      bcrypt.genSalt(10, (saltErr, salt) => {
+        bcrypt.hash(newUser.password, salt, (hashErr, hash) => {
+          if (hashErr) {throw hashErr;}
+          newUser.password = hash;
+          newUser.save().then(usr => res.json(usr)).catch(err => console.log(err));
+        });
+      });
     }
   });
 
-  const newUser = new User({name, email, password});
-
-  // salt + hash password before saving
-  bcrypt.genSalt(10, (saltErr, salt) => {
-    bcrypt.hash(newUser.password, salt, (hashErr, hash) => {
-      if (hashErr) {throw hashErr;}
-      newUser.password = hash;
-      newUser.save().then(user => res.json(user)).catch(err => console.log(err));
-    });
-  });
 });
 
 router.post("/login", (req, res) => {

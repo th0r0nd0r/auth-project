@@ -6,9 +6,10 @@ export const signupUser = (userData, history, handleError) => {
   axios
     .post("/auth/signup", userData)
     .then(res => history.push("/"))
-    .catch(err => 
-      handleError(err.response.data)
-    );
+    .catch(err => {
+      console.log("Error: ", err);
+      handleError(err.response.data);
+    });
 };
 
 // // Login - get user token
