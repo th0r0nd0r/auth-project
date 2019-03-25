@@ -36,6 +36,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    console.log("global state; ", this.state);    
     // Check for token to keep user logged in
     if (localStorage.jwtToken) {
       // Set auth token header auth
@@ -89,7 +90,7 @@ class Home extends React.Component {
                                               loggedIn ? (
                                                 <Dashboard 
                                                   auth={authProps} 
-                                                  logoutUser={logoutUser}
+                                                  logoutUser={() => logoutUser(this.setCurrentUser)}
                                                   />  
                                               ) : (
                                                 <Redirect to="/login" />

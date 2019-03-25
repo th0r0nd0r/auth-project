@@ -50,8 +50,20 @@ export default class SessionForm extends React.Component {
   // }
 
   componentDidMount() {
-    if (this.props.auth.loggedIn) {
-      this.props.history.push("/dashboard");
+    const {auth, history} = this.props;
+    console.log("session form props: ", this.props);
+
+    if (auth.loggedIn) {
+      history.push("/dashboard");
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {auth, history} = this.props;
+    console.log("session form props: ", this.props);
+
+    if (auth.loggedIn) {
+      history.push("/dashboard");
     }
   }
 
