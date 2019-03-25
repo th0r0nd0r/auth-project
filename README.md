@@ -4,9 +4,14 @@
 - Fullstack user auth using JWTs and Passport.js
 - Dynamic SPA with React.js
 - frontend routing with React Router
+- timed token expiration and user logout
 
 ## How to Use
-
+- clone or download this repository
+- locally, navigate to the `server` directory
+- run `npm run install-all` in the terminal
+- navigate to `http://localhost:8080` in your browser
+- you're all set!
 
 ## Future Improvements
 - implement OAuth with LinkedIn
