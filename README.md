@@ -2,6 +2,11 @@
 
 ## Features
 - Fullstack user auth using JWTs and Passport.js
+- Dynamic SPA with React.js
+- frontend routing with React Router
+
+## How to Use
+
 
 ## Future Improvements
 - implement OAuth with LinkedIn

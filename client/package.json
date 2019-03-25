@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --watch --mode=development",
-    "webpack:server": "webpack-dev-server",
-    "postinstall": "webpack:server"
+    "webpack:server": "webpack-dev-server"
   },
   "keywords": [],
   "author": "",
