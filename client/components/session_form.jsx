@@ -1,4 +1,5 @@
 import React from 'react';
+import * as authUtils from '../utils/auth_api_utils';
 
 export default class SessionForm extends React.Component {
   constructor(props) {
@@ -7,6 +8,11 @@ export default class SessionForm extends React.Component {
     // TODO: use this.props.isLoginForm instead and link to new Route in toggleFormType
     this.state = {
       isLoginForm: true,
+      errors: {},
+      name: "",
+      email: "",
+      password: "",
+      password2: ""
     };
 
     this.toggleFormType = this.toggleFormType.bind(this);
@@ -16,8 +22,19 @@ export default class SessionForm extends React.Component {
     this.setState({isLoginForm: !this.state.isLoginForm});
   }
 
+  handleInputChange(e) {
+    this.setState({ [e.target.id]: e.target.value });
+  }
+
+  handleError(errors) {
+    this.setState({errors});
+  }
+
   render() {
-    const {isLoginForm} = this.state;
+    // console.log("session form props: ", this.props);
+    console.log("session form state: ", this.state);
+    const {isLoginForm, errors} = this.state;
+
     let btnText, altText;
     if (isLoginForm) {
       btnText = "Log In";
@@ -37,22 +54,22 @@ export default class SessionForm extends React.Component {
           {!isLoginForm && 
             <div className="input-group">
               {/* <label className="form-label" htmlFor="username">Username</label> */}
-              <input className="form-input" type="text" id="username" placeholder="Username" />
+              <input onChange={this.handleInputChange} error={errors.name} className="form-input" type="text" id="name" placeholder="Username" />
             </div>
           }
           <div className="input-group">
             {/* <label className="form-label" htmlFor="email">Email</label> */}
-            <input className="form-input" type="text" id="email" placeholder="Email" />
+            <input onChange={this.handleInputChange} error={errors.email} className="form-input" type="email" id="email" placeholder="Email" />
           </div>
           <div className="input-group">
             {/* <label className="form-label" htmlFor="password">Password</label> */}
-            <input className="form-input" type="password" id="password" placeholder="Password" />
+            <input onChange={this.handleInputChange} error={errors.password} className="form-input" type="password" id="password" placeholder="Password" />
           </div>
 
           {!isLoginForm && 
             <div className="input-group">
               {/* <label className="form-label" htmlFor="confirm-password">Confirm Password</label> */}
-              <input className="form-input" type="password" id="confirm-password" placeholder="Confirm Password" />
+              <input onChange={this.handleInputChange} error={errors.password2} className="form-input" type="password" id="password2" placeholder="Confirm Password" />
             </div>
           }
           <div>

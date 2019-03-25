@@ -7,8 +7,8 @@ export const signupUser = (userData, history, handleError) => dispatch => {
     url: '/auth/signup',
     data: userData
   })
-    .then(res => history.push("/login"))
+    .then(res => history.push("/"))
     .catch(err => 
-      handleError(err)
+      handleError(err.response.data)
     );
 };

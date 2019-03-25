@@ -1,14 +1,18 @@
 import React from 'react';
 import SessionForm from './session_form';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, 
+        Route, 
+        Link, 
+        withRouter } from "react-router-dom";
 import { Redirect } from 'react-router';
 import Dashboard from './dashboard';
+import * as authUtils from '../utils/auth_api_utils';
 
 
 // TODO: get loggedIn bool from server
 let loggedIn = false;
 
-export default class Home extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -25,10 +29,18 @@ export default class Home extends React.Component {
               <Dashboard />
             )
           )}/>
-          <Route path="/login" render={(props) => <SessionForm {...props} newUser={false} />} />
-          <Route path="/signup" render={(props) => <SessionForm {...props} newUser={true} />} />
+          <Route path="/login" render={(props) => <SessionForm 
+                                                    {...props} 
+                                                    isLoginForm={true} 
+                                                    submitUser={authUtils.loginUser} /> } />
+          <Route path="/signup" render={(props) => <SessionForm 
+                                                    {...props} 
+                                                    isLoginForm={false} 
+                                                    submitUser={authUtils.signupUser} /> } />
         </div>
       </Router>
     );
   }
 }
+
+export default Home;
