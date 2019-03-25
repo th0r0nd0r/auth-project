@@ -63,24 +63,28 @@ export default class SessionForm extends React.Component {
           </div>
 
           {!isLoginForm && 
-            <div className="input-group">
+            <div className="form-group">
               {/* <label className="form-label" htmlFor="username">Username</label> */}
-              <input onChange={this.handleInputChange} error={errors.name} className="form-input" type="text" id="name" placeholder="Username" />
+              <input onChange={this.handleInputChange} className={errors.name ? "form-input is-error" : "form-input"} type="text" id="name" placeholder="Username" />
+              <p class="form-input-hint">{errors.name}</p>
             </div>
           }
-          <div className="input-group">
+          <div className="form-group">
             {/* <label className="form-label" htmlFor="email">Email</label> */}
-            <input onChange={this.handleInputChange} error={errors.email} className="form-input" type="email" id="email" placeholder="Email" />
+            <input onChange={this.handleInputChange} className={errors.email ? "form-input is-error" : "form-input"} type="email" id="email" placeholder="Email" />
+            <p class="form-input-hint">{errors.email}</p>
           </div>
-          <div className="input-group">
+          <div className="form-group">
             {/* <label className="form-label" htmlFor="password">Password</label> */}
-            <input onChange={this.handleInputChange} error={errors.password} className="form-input" type="password" id="password" placeholder="Password" />
+            <input onChange={this.handleInputChange} className={errors.password ? "form-input is-error" : "form-input"} type="password" id="password" placeholder="Password" />
+            <p class="form-input-hint">{errors.password}</p>
           </div>
 
           {!isLoginForm && 
-            <div className="input-group">
+            <div className="form-group">
               {/* <label className="form-label" htmlFor="confirm-password">Confirm Password</label> */}
-              <input onChange={this.handleInputChange} error={errors.password2} className="form-input" type="password" id="password2" placeholder="Confirm Password" />
+              <input onChange={this.handleInputChange} className={errors.password2 ? "form-input is-error" : "form-input"} type="password" id="password2" placeholder="Confirm Password" />
+              <p class="form-input-hint">{errors.password2}</p>
             </div>
           }
           <div>
