@@ -45,11 +45,11 @@ export const loginUser = (options) => {
 
 
 // Log user out
-export const logoutUser = () => dispatch => {
+export const logoutUser = setCurrentUser => {
   // Remove token from local storage
   localStorage.removeItem("jwtToken");
   // Remove auth header for future requests
   setAuthToken(false);
   // Set current user to empty object {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}));
+  setCurrentUser({});
 };
