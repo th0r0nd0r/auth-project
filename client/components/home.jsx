@@ -6,12 +6,10 @@ import { BrowserRouter as Router,
         withRouter } from "react-router-dom";
 import { Redirect } from 'react-router';
 import Dashboard from './dashboard';
-import * as authUtils from '../utils/auth_api_utils';
+import {loginUser, signupUser, logoutUser} from '../utils/auth_api_utils';
 import isEmpty from 'is-empty';
-
-
-// TODO: get loggedIn bool from server
-let loggedIn = false;
+import jwt_decode from 'jwt-decode';
+import setAuthToken from '../utils/authToken';
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,7 +17,7 @@ class Home extends React.Component {
 
     this.state = {
       currentUser: {},
-      isAuthenticated: false,
+      loggedIn: false,
       errors: {}
     };
 
@@ -30,8 +28,29 @@ class Home extends React.Component {
   setCurrentUser(currentUser) {
     this.setState({
       currentUser, 
-      isAuthenticated: !isEmpty(currentUser)
+      loggedIn: !isEmpty(currentUser)
     });
+  }
+
+  componentDidMount() {
+    // Check for token to keep user logged in
+    if (localStorage.jwtToken) {
+      // Set auth token header auth
+      const token = localStorage.jwtToken;
+      setAuthToken(token);
+      // Decode token and get user info and exp
+      const decoded = jwt_decode(token);
+      // Set user and isAuthenticated
+      this.setCurrentUser(decoded);
+    // Check for expired token
+      const currentTime = Date.now() / 1000; // to get in milliseconds
+      if (decoded.exp < currentTime) {
+        // Logout user
+        logoutUser(this.setCurrentUser);
+        // Redirect to login
+        window.location.href = "./login";
+      }
+    }
   }
 
   // setErrors(errors) {
@@ -39,7 +58,8 @@ class Home extends React.Component {
   // }
 
   render() {
-    const {currentUser} = this.state;
+    const {currentUser, loggedIn} = this.state;
+    const authProps = {currentUser, loggedIn};
 
     return (
       <Router>
@@ -49,22 +69,22 @@ class Home extends React.Component {
             !loggedIn ? (
               <Redirect to="/signup"/>
             ) : (
-              <Dashboard currentUser={currentUser}/>
+              <Dashboard currentUser={currentUser} logoutUser={logoutUser}/>
             )
           )}/>
           <Route path="/login" render={(props) => <SessionForm 
                                                     {...props} 
                                                     isLoginForm={true} 
-                                                    submitUser={authUtils.loginUser}
-                                                    currentUser={currentUser}
+                                                    submitUser={loginUser}
+                                                    auth={authProps}
                                                     setCurrentUser={this.setCurrentUser}
                                                     // setErrors={this.setErrors}
                                                      /> } />
           <Route path="/signup" render={(props) => <SessionForm 
                                                     {...props} 
                                                     isLoginForm={false} 
-                                                    submitUser={authUtils.signupUser} 
-                                                    currentUser={currentUser}
+                                                    submitUser={signupUser} 
+                                                    auth={authProps}
                                                     setCurrentUser={this.setCurrentUser}
                                                     // setErrors={this.setErrors}
                                                     /> } />

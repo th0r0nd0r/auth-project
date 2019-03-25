@@ -35,6 +35,9 @@ export const loginUser = (options) => {
       setAuthToken(token);
       // Decode token to get user data
       const decoded = jwt_decode(token);
+      // set timer to logout user after 5 minutes
+      // (though attempts at accessing protected routes would log them out too + token will be expired)
+      setTimeout(() => logoutUser(setCurrentUser), 300000);
       // Set current user
       setCurrentUser(decoded);
     })
@@ -50,6 +53,6 @@ export const logoutUser = setCurrentUser => {
   localStorage.removeItem("jwtToken");
   // Remove auth header for future requests
   setAuthToken(false);
-  // Set current user to empty object {} which will set isAuthenticated to false
+  // Set current user to empty object {} which will set loggedIn to false
   setCurrentUser({});
 };
