@@ -16,6 +16,7 @@ export default class SessionForm extends React.Component {
     this.handleError = this.handleError.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.redirectIfLoggedIn = this.redirectIfLoggedIn.bind(this);
   }
 
   toggleFormType() {
@@ -45,31 +46,23 @@ export default class SessionForm extends React.Component {
     submitUser({userData, history, handleError: this.handleError, setCurrentUser});
   }
 
-  // componentDidUpdate() {
-  //   console.log("new state: ", this.state);
-  // }
-
-  componentDidMount() {
+  redirectIfLoggedIn() {
     const {auth, history} = this.props;
-    console.log("session form props: ", this.props);
 
     if (auth.loggedIn) {
       history.push("/dashboard");
     }
+  }
+
+  componentDidMount() {
+    this.redirectIfLoggedIn();
   }
 
   componentDidUpdate(prevProps) {
-    const {auth, history} = this.props;
-    console.log("session form props: ", this.props);
-
-    if (auth.loggedIn) {
-      history.push("/dashboard");
-    }
+    this.redirectIfLoggedIn();
   }
 
   render() {
-    // console.log("session form props: ", this.props);
-    // console.log("session form state: ", this.state);
     const {errors} = this.state;
     const {submitUser, isLoginForm} = this.props;
 

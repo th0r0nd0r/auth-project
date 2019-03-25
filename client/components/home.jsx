@@ -31,12 +31,7 @@ class Home extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-    console.log("global state; ", this.state);
-  }
-
-  componentDidMount() {
-    console.log("global state; ", this.state);    
+  componentDidMount() {   
     // Check for token to keep user logged in
     if (localStorage.jwtToken) {
       // Set auth token header auth
