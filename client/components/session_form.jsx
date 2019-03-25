@@ -38,11 +38,11 @@ export default class SessionForm extends React.Component {
 
   handleSubmit() {
     const {name, email, password, password2} = this.state;
-    const {submitUser, history} = this.props;
+    const {submitUser, history, setCurrentUser} = this.props;
 
     const userData = {name, email, password, password2};
 
-    submitUser({userData, history, handleError: this.handleError});
+    submitUser({userData, history, handleError: this.handleError, setCurrentUser});
   }
 
   // componentDidUpdate() {
@@ -56,7 +56,7 @@ export default class SessionForm extends React.Component {
   }
 
   render() {
-    console.log("session form props: ", this.props);
+    // console.log("session form props: ", this.props);
     // console.log("session form state: ", this.state);
     const {errors} = this.state;
     const {submitUser, isLoginForm} = this.props;

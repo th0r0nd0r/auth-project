@@ -10,6 +10,7 @@ import {loginUser, signupUser, logoutUser} from '../utils/auth_api_utils';
 import isEmpty from 'is-empty';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from '../utils/authToken';
+import ProtectedRoute from '../custom_routes/ProtectedRoute';
 
 class Home extends React.Component {
   constructor(props) {
@@ -28,6 +29,10 @@ class Home extends React.Component {
       currentUser, 
       loggedIn: !isEmpty(currentUser)
     });
+  }
+
+  componentDidUpdate() {
+    console.log("global state; ", this.state);
   }
 
   componentDidMount() {
@@ -60,10 +65,10 @@ class Home extends React.Component {
         <div className="bg">
           {/* <h1>React is up and running!</h1> */}
           <Route exact path="/" render={() => (
-            !loggedIn ? (
-              <Redirect to="/signup"/>
+            loggedIn ? (
+              <Redirect to="/dashboard" />
             ) : (
-              <Dashboard currentUser={currentUser} logoutUser={logoutUser}/>
+              <Redirect to="/signup"/>
             )
           )}/>
           <Route path="/login" render={(props) => <SessionForm 
@@ -80,6 +85,15 @@ class Home extends React.Component {
                                                     auth={authProps}
                                                     setCurrentUser={this.setCurrentUser}
                                                     /> } />
+          <Route path="/dashboard" render={(props) => 
+                                              loggedIn ? (
+                                                <Dashboard 
+                                                  auth={authProps} 
+                                                  logoutUser={logoutUser}
+                                                  />  
+                                              ) : (
+                                                <Redirect to="/login" />
+                                              )} />
         </div>
       </Router>
     );

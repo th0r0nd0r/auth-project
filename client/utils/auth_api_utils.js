@@ -13,7 +13,7 @@ export const signupUser = (options) => {
 
   axios
     .post("/auth/signup", userData)
-    .then(res => loginUser(userData, setCurrentUser))
+    .then(res => loginUser({userData, setCurrentUser}))
     .then(res => history.push("/"))
     .catch(err => {
       handleError(err.response.data);
@@ -41,9 +41,10 @@ export const loginUser = (options) => {
       // Set current user
       setCurrentUser(decoded);
     })
-    .catch(err =>
-      handleError(err.response.data)
-    );
+    .catch(err => {
+      console.log("ERROR: ", err);
+      handleError(err.response.data);
+    });
 };
 
 
