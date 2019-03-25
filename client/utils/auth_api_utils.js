@@ -38,7 +38,7 @@ export const loginUser = (options) => {
       const decoded = jwt_decode(token);
       // set timer to logout user after 5 minutes
       // (though attempts at accessing protected routes would log them out too + token will be expired)
-      setTimeout(() => logoutUser(setCurrentUser), 300000);
+      setTimeout(() => logoutUser(setCurrentUser, "Your token has expired. Please login again."), 300000);
       // Set current user
       setCurrentUser(decoded);
     })
@@ -50,11 +50,11 @@ export const loginUser = (options) => {
 
 
 // Log user out
-export const logoutUser = setCurrentUser => {
+export const logoutUser = (setCurrentUser, msg="") => {
   // Remove token from local storage
   localStorage.removeItem("jwtToken");
   // Remove auth header for future requests
   setAuthToken(false);
   // Set current user to empty object {} which will set loggedIn to false
-  setCurrentUser({});
+  setCurrentUser({}, msg);
 };

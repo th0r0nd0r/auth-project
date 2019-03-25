@@ -18,15 +18,17 @@ class Home extends React.Component {
     this.state = {
       currentUser: {},
       loggedIn: false,
+      message: "",
     };
 
     this.setCurrentUser = this.setCurrentUser.bind(this);
   }
 
-  setCurrentUser(currentUser) {
+  setCurrentUser(currentUser, msg="") {
     this.setState({
       currentUser, 
-      loggedIn: !isEmpty(currentUser)
+      loggedIn: !isEmpty(currentUser),
+      message: msg
     });
   }
 
@@ -52,13 +54,13 @@ class Home extends React.Component {
   }
 
   render() {
-    const {currentUser, loggedIn} = this.state;
+    const {currentUser, loggedIn, message} = this.state;
     const authProps = {currentUser, loggedIn};
 
     return (
       <Router>
         <div className="bg">
-          {/* <h1>React is up and running!</h1> */}
+          {!isEmpty(message) && <p className="text-center">{message}</p>}
           <Route exact path="/" render={() => (
             loggedIn ? (
               <Redirect to="/dashboard" />
