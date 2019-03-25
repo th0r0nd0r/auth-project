@@ -34,3 +34,7 @@ html, body, .bg {
 .input-group {
   margin-bottom: .5rem;
 }
+
+.text-column {
+  flex-direction: column;
+}

@@ -27,6 +27,7 @@ export const loginUser = (options) => {
   axios
     .post("/auth/login", userData)
     .then(res => {
+      clearTimeout();
       // Save to localStorage
       // Set token to localStorage
       const { token } = res.data;

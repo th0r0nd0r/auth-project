@@ -1,6 +1,5 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import schema from './schema/schema';
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth';
 import keys from './config/keys';
@@ -16,7 +15,7 @@ app.use(bodyParser.json());
 app.use(cors({
   origin: 'http://localhost:8080',
   credentials: true,
-  
+
 }));
 
 // use environment variable in production
