@@ -5,21 +5,29 @@ export default class SessionForm extends React.Component {
 
     // TODO: use this.props.isLoginForm instead and link to new Route in toggleFormType
     this.state = {
-      isLoginForm: true,
       errors: {},
-      name: "",
-      email: "",
-      password: "",
-      password2: ""
+      userData: {
+        name: "",
+        email: "",
+        password: "",
+        password2: ""
+      }
     };
 
     this.toggleFormType = this.toggleFormType.bind(this);
     this.handleError = this.handleError.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   toggleFormType() {
-    this.setState({isLoginForm: !this.state.isLoginForm});
+    const {isLoginForm, history} = this.props;
+
+    if (isLoginForm) {
+      history.push("/signup");
+    } else {
+      history.push("/login");
+    }
   }
 
   handleInputChange(e) {
@@ -31,20 +39,34 @@ export default class SessionForm extends React.Component {
     this.setState({errors});
   }
 
-  componentDidMount() {
-    console.log("mounted");
-    this.props.submitUser({
-      name: "ricky",
-      email: 'superduper@example.com',
-      password: 'password',
-      password2: 'password'
-    }, history, this.handleError);
+  handleSubmit() {
+    const {name, email, password, password2} = this.state;
+    const {submitUser, history} = this.props;
+
+    const user = {name, email, password, password2};
+
+    submitUser(user, history, this.handleError);
   }
 
+  componentDidUpdate() {
+    console.log("new state: ", this.state);
+  }
+
+  // componentDidMount() {
+  //   console.log("mounted");
+  //   this.props.submitUser({
+  //     name: "ricky",
+  //     email: 'superduper@example.com',
+  //     password: 'password',
+  //     password2: 'password'
+  //   }, history, this.handleError);
+  // }
+
   render() {
-    console.log("session form props: ", this.props);
-    console.log("session form state: ", this.state);
-    const {isLoginForm, errors} = this.state;
+    // console.log("session form props: ", this.props);
+    // console.log("session form state: ", this.state);
+    const {errors} = this.state;
+    const {submitUser, isLoginForm} = this.props;
 
     let btnText, altText;
     if (isLoginForm) {
@@ -66,29 +88,29 @@ export default class SessionForm extends React.Component {
             <div className="form-group">
               {/* <label className="form-label" htmlFor="username">Username</label> */}
               <input onChange={this.handleInputChange} className={errors.name ? "form-input is-error" : "form-input"} type="text" id="name" placeholder="Username" />
-              <p class="form-input-hint">{errors.name}</p>
+              <p className="form-input-hint">{errors.name}</p>
             </div>
           }
           <div className="form-group">
             {/* <label className="form-label" htmlFor="email">Email</label> */}
             <input onChange={this.handleInputChange} className={errors.email ? "form-input is-error" : "form-input"} type="email" id="email" placeholder="Email" />
-            <p class="form-input-hint">{errors.email}</p>
+            <p className="form-input-hint">{errors.email}</p>
           </div>
           <div className="form-group">
             {/* <label className="form-label" htmlFor="password">Password</label> */}
             <input onChange={this.handleInputChange} className={errors.password ? "form-input is-error" : "form-input"} type="password" id="password" placeholder="Password" />
-            <p class="form-input-hint">{errors.password}</p>
+            <p className="form-input-hint">{errors.password}</p>
           </div>
 
           {!isLoginForm && 
             <div className="form-group">
               {/* <label className="form-label" htmlFor="confirm-password">Confirm Password</label> */}
               <input onChange={this.handleInputChange} className={errors.password2 ? "form-input is-error" : "form-input"} type="password" id="password2" placeholder="Confirm Password" />
-              <p class="form-input-hint">{errors.password2}</p>
+              <p className="form-input-hint">{errors.password2}</p>
             </div>
           }
           <div>
-            <button className="btn btn-primary submit-btn" onClick={() => console.log("button clicked")}>
+            <button className="btn btn-primary submit-btn" onClick={this.handleSubmit}>
               {btnText}
             </button>
             <div className="text-center">
