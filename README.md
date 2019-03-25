@@ -3,8 +3,8 @@
 ## Features
 - Fullstack user auth using JWTs and Passport.js
 - Dynamic SPA with React.js
-- frontend routing with React Router
-- timed token expiration and user logout
+- Frontend routing with React Router
+- Timed token expiration and user logout
 
 ## How to Use
 - clone or download this repository
