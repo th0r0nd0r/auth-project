@@ -7,6 +7,7 @@ import { BrowserRouter as Router,
 import { Redirect } from 'react-router';
 import Dashboard from './dashboard';
 import * as authUtils from '../utils/auth_api_utils';
+import isEmpty from 'is-empty';
 
 
 // TODO: get loggedIn bool from server
@@ -17,7 +18,8 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      currentUser: null,
+      currentUser: {},
+      isAuthenticated: false,
       errors: {}
     };
 
@@ -26,7 +28,10 @@ class Home extends React.Component {
   }
 
   setCurrentUser(currentUser) {
-    this.setState({currentUser});
+    this.setState({
+      currentUser, 
+      isAuthenticated: !isEmpty(currentUser)
+    });
   }
 
   // setErrors(errors) {
