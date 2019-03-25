@@ -6,12 +6,10 @@ export default class SessionForm extends React.Component {
     // TODO: use this.props.isLoginForm instead and link to new Route in toggleFormType
     this.state = {
       errors: {},
-      userData: {
-        name: "",
-        email: "",
-        password: "",
-        password2: ""
-      }
+      name: "",
+      email: "",
+      password: "",
+      password2: ""
     };
 
     this.toggleFormType = this.toggleFormType.bind(this);
@@ -40,6 +38,7 @@ export default class SessionForm extends React.Component {
   }
 
   handleSubmit() {
+    // console.log("submitting...");
     const {name, email, password, password2} = this.state;
     const {submitUser, history} = this.props;
 

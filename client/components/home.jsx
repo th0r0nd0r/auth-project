@@ -24,7 +24,7 @@ class Home extends React.Component {
           {/* <h1>React is up and running!</h1> */}
           <Route exact path="/" render={() => (
             !loggedIn ? (
-              <Redirect to="/login"/>
+              <Redirect to="/signup"/>
             ) : (
               <Dashboard />
             )
