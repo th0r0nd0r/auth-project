@@ -10,7 +10,6 @@ import {loginUser, signupUser, logoutUser} from '../utils/auth_api_utils';
 import isEmpty from 'is-empty';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from '../utils/authToken';
-import ProtectedRoute from '../custom_routes/ProtectedRoute';
 
 class Home extends React.Component {
   constructor(props) {
