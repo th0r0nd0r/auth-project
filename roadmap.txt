@@ -42,3 +42,4 @@ Future improvements:
 - add redux for scaling to full-sized app
 - add testing
 - abstract routing logic into PrivateRoute component
+- wrap jsx in SessionForm in a form tag to get submit behavior out of the box

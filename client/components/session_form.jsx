@@ -17,6 +17,7 @@ export default class SessionForm extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.redirectIfLoggedIn = this.redirectIfLoggedIn.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   toggleFormType() {
@@ -44,6 +45,12 @@ export default class SessionForm extends React.Component {
     const userData = {name, email, password, password2};
 
     submitUser({userData, history, handleError: this.handleError, setCurrentUser});
+  }
+
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.handleSubmit();
+    }
   }
 
   redirectIfLoggedIn() {
@@ -76,7 +83,7 @@ export default class SessionForm extends React.Component {
     }
 
     return (
-      <div className="card col-4 col-mx-auto mt-50">
+      <div className="card col-4 col-mx-auto mt-50" onKeyPress={this.handleKeyPress}>
         <div className="form">
           <div className="text-center">
             <h2>Welcome to the app!</h2>
