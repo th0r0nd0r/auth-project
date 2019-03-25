@@ -9,7 +9,7 @@
 ## How to Use
 - clone or download this repository
 - locally, navigate to the `server` directory
-- run `npm run install-all` in the terminal
+- run `npm run startup` in the terminal
 - navigate to `http://localhost:8080` in your browser
 - you're all set!
 
