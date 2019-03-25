@@ -1,6 +1,4 @@
 import React from 'react';
-import * as authUtils from '../utils/auth_api_utils';
-
 export default class SessionForm extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +14,8 @@ export default class SessionForm extends React.Component {
     };
 
     this.toggleFormType = this.toggleFormType.bind(this);
+    this.handleError = this.handleError.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   toggleFormType() {
@@ -27,11 +27,22 @@ export default class SessionForm extends React.Component {
   }
 
   handleError(errors) {
+    console.log("response errors: ", errors);
     this.setState({errors});
   }
 
+  componentDidMount() {
+    console.log("mounted");
+    this.props.submitUser({
+      name: "ricky",
+      email: 'superduper@example.com',
+      password: 'password',
+      password2: 'password'
+    }, history, this.handleError);
+  }
+
   render() {
-    // console.log("session form props: ", this.props);
+    console.log("session form props: ", this.props);
     console.log("session form state: ", this.state);
     const {isLoginForm, errors} = this.state;
 
