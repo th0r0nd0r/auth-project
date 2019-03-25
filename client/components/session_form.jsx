@@ -40,9 +40,9 @@ export default class SessionForm extends React.Component {
     const {name, email, password, password2} = this.state;
     const {submitUser, history} = this.props;
 
-    const user = {name, email, password, password2};
+    const userData = {name, email, password, password2};
 
-    submitUser(user, history, this.handleError);
+    submitUser({userData, history, handleError: this.handleError});
   }
 
   // componentDidUpdate() {

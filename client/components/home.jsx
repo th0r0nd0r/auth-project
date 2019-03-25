@@ -22,11 +22,16 @@ class Home extends React.Component {
     };
 
     this.setCurrentUser = this.setCurrentUser.bind(this);
+    this.setErrors = this.setErrors.bind(this);
   }
 
   setCurrentUser(currentUser) {
     this.setState({currentUser});
   }
+
+  // setErrors(errors) {
+  //   this.setState({errors});
+  // }
 
   render() {
     const {currentUser} = this.state;
@@ -48,6 +53,7 @@ class Home extends React.Component {
                                                     submitUser={authUtils.loginUser}
                                                     currentUser={currentUser}
                                                     setCurrentUser={this.setCurrentUser}
+                                                    // setErrors={this.setErrors}
                                                      /> } />
           <Route path="/signup" render={(props) => <SessionForm 
                                                     {...props} 
@@ -55,6 +61,7 @@ class Home extends React.Component {
                                                     submitUser={authUtils.signupUser} 
                                                     currentUser={currentUser}
                                                     setCurrentUser={this.setCurrentUser}
+                                                    // setErrors={this.setErrors}
                                                     /> } />
         </div>
       </Router>

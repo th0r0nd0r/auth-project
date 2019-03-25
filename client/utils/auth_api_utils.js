@@ -2,16 +2,18 @@ import setAuthToken from './authToken';
 import jwt_decode from 'jwt-decode';
 import axios from './axiosSetup';
 
+// set defaults for options objects
+const defaults = {
+  userData: {},
+  handleError: (err) => console.log(err.response.data),
+};
+
 export const signupUser = (options) => {
-  const defaults = {
-    userData: {},
-    handleError: (err) => console.log(err.response.data),
-  };
-  const opts = Object.assign({}, defaults, options);
-  const {userData, history, handleError, setCurrentUser} = opts;
+  const {userData, history, handleError, setCurrentUser} = Object.assign({}, defaults, options);
 
   axios
     .post("/auth/signup", userData)
+    .then(res => loginUser(userData, setCurrentUser))
     .then(res => history.push("/"))
     .catch(err => {
       handleError(err.response.data);
@@ -19,7 +21,9 @@ export const signupUser = (options) => {
 };
 
 // Login - get user token
-export const loginUser = (userData, setCurrentUser) => {
+export const loginUser = (options) => {
+  const {userData, handleError, setCurrentUser} = Object.assign({}, defaults, options);
+
   axios
     .post("/auth/login", userData)
     .then(res => {
@@ -35,24 +39,8 @@ export const loginUser = (userData, setCurrentUser) => {
       setCurrentUser(decoded);
     })
     .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
+      handleError(err.response.data)
     );
-};
-// Set logged in user
-export const setCurrentUser = decoded => {
-  return {
-    type: SET_CURRENT_USER,
-    payload: decoded
-  };
-};
-// User loading
-export const setUserLoading = () => {
-  return {
-    type: USER_LOADING
-  };
 };
 
 
