@@ -17,7 +17,8 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      currentUser: null
+      currentUser: null,
+      errors: {}
     };
 
     this.setCurrentUser = this.setCurrentUser.bind(this);
