@@ -91,13 +91,4 @@ router.post("/login", (req, res) => {
 
 // token patterns from https://github.com/rishipr/mern-auth/tree/master/routes/api
 
-router.get('/logout', (req, res) => {
-  // log out users
-});
-
-
-router.get('/linkedin', (req, res) => {
-  // handle request for linkedin
-});
-
 export default router;
