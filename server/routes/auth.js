@@ -8,10 +8,6 @@ import validateLogin from '../validation/login';
 import validateSignup from '../validation/signup';
 import User from '../models/User';
 
-// standard auth route
-router.get('/login', (req, res) => {
-  // standard login
-});
 
 router.post('/signup', (req, res) => {
   const { name, email, password } = req.body;
